@@ -2,13 +2,13 @@
 
 ## Goals
 
- - [ ] Visualize the data from STOCK API  
+- [ ] Visualize the data from STOCK API  
  
   [Stock API](https://stocknewsapi.com/)
 
 - [ ] Retrieve News
 
-**- [ ] Show Ads for Companies** (optional)
+- [ ] Show Ads for Companies *(optional)* 
 
 ## Tech Stack
 
