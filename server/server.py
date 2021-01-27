@@ -1,13 +1,25 @@
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,flash
 from flask_cors import CORS, cross_origin
 from newsapi import NewsApiClient
-import requests
+import requests,random,string
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 newsapi = NewsApiClient(api_key='6d00c7e55c784d84b0f24f28defb09a6')
-
+N=20
+randomkey=''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(N))
+app.secret_key = randomkey
+all_articles = lambda x:(newsapi.get_everything(
+    q=x,
+    sources='bbc-news,the-verge',
+    domains='bbc.co.uk,techcrunch.com',
+    from_param='2021-12-01',
+    to='2020-12-12',
+    language='en',
+    sort_by='relevancy',
+    page=1
+))
 @app.route('/<ticker>')
 def hello_world(ticker):
 
@@ -33,22 +45,15 @@ def render_graph_page():
 
 @app.route('/news')
 def render_news_page():
-    print(request.args.get('q'))
-    if request.args.get('q')==None:
-        query='finance'
-    else:
-        query=request.args.get('q')
-    all_articles = newsapi.get_everything(
-        q=query,
-        sources='bbc-news,the-verge',
-        domains='bbc.co.uk,techcrunch.com',
-        from_param='2021-12-01',
-        to='2020-12-12',
-        language='en',
-        sort_by='relevancy',
-        page=1
-    )
-    return render_template('news.html', all_articles=all_articles)
+    q=request.args.get('q')
+    if q:
+        query=all_articles(q)
+        if query['articles']:
+            return render_template('news.html', all_articles=query)
+        else:
+            flash("No related news found.")
+            return render_template('news.html', all_articles=all_articles('finance'))
+    return render_template('news.html', all_articles=all_articles('finance'))
 
 if __name__ == '__main__':
     app.debug=True
