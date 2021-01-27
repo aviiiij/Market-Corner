@@ -1,0 +1,12 @@
+.ticker_code {
+    width: 200px;
+}
+
+#chart {
+    border: 1px black solid;
+}
+
+.Company {
+    font-size: larger;
+    font-weight: bold;
+}

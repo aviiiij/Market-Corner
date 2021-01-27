@@ -4,6 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
+import { NgApexchartsModule } from "ng-apexcharts";
+import * as bootstrap from "bootstrap";
+
+
 
 @NgModule({
   declarations: [
@@ -13,7 +18,9 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     GoogleChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

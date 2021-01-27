@@ -18,10 +18,15 @@ export class AppComponent {
   }
 
   getHeroes(): void {
-    this.stockService.getHeroes()
-        .subscribe(values => this.data = values);
+    this.stockService.getHeroes(this.ticker)
+        .subscribe(values => this.data = values.series.map(x => [x.timestamp,+x.high,+x.close,+x.open,+x.low]));
     console.log(this.data);
   }
+
+  search(): void {
+    this.getHeroes();
+  }
+
   title = 'market-corner';
   myType = 'CandlestickChart' as ChartType;
   data: (string | number)[][] = [];
@@ -30,10 +35,13 @@ export class AppComponent {
   options = {
       legend:'none', 
       candlestick: {
-        fallingColor: { strokeWidth: 2, stroke:'#a52714' }, // red
-        risingColor: { strokeWidth: 2, stroke: '#0f9d58' }   // green
+        fallingColor: { strokeWidth: 1, stroke:'#a52714', fill:'#a52714' }, // red
+        risingColor: { strokeWidth: 1, stroke: '#0f9d58', fill:'#0f9d58' }   // green
       }
   };
-  width = 700;
+  width = 1500;
   height = 600;
+  ticker="IBM";
+
+  
 }

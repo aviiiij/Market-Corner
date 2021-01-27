@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Market Corner</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  {% block styles %}
+  {% endblock %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <ul class="navbar-nav">
+    <li class="nav-item ">
+      <a class="nav-link" href="#" style="font-weight:bold;color:white;">Market Corner</a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="{{url_for('render_news_page')}}">News</a>
+    </li>
+    <li class="nav-item active">
+      <a class="nav-link" href="{{url_for('render_graph_page')}}">Graph</a>
+    </li>
+  </ul>
+</nav>
+<br>
+
+<div class="container-fluid">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

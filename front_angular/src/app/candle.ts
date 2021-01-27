@@ -21,10 +21,11 @@ export interface stamp {
     low: number;
     close: number;
     volume: number;
+    timestamp: string;
 }
 
 export interface series {
-    list: stamp;
+    series: stamp[];
 }
 
 
