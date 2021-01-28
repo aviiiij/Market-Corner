@@ -22,7 +22,6 @@ all_articles = lambda x:(newsapi.get_everything(
 ))
 @app.route('/<ticker>')
 def hello_world(ticker):
-
     data = requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol='+ticker+'&outputsize=compact&apikey=DLNKMATBLTI7J8SR')
     data = data.json()
     response=[]
@@ -38,6 +37,12 @@ def hello_world(ticker):
     print('complete')
     return {'series':response}
 
+@app.route('/news/<search_term>')
+def search(search_term):
+    temp=all_articles(search_term)['articles']
+    if not temp:
+        return {'all_articles':all_articles('finance')['articles']}
+    return {'all_articles':temp}
 
 @app.route('/graph')
 def render_graph_page():
@@ -45,15 +50,7 @@ def render_graph_page():
 
 @app.route('/news')
 def render_news_page():
-    q=request.args.get('q')
-    if q:
-        query=all_articles(q)
-        if query['articles']:
-            return render_template('news.html', all_articles=query)
-        else:
-            flash("No related news found.")
-            return render_template('news.html', all_articles=all_articles('finance'))
-    return render_template('news.html', all_articles=all_articles('finance'))
+    return render_template('news.html')
 
 if __name__ == '__main__':
     app.debug=True

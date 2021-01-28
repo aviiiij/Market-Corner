@@ -8,12 +8,10 @@
 <div class = container>
       <!-- Search bar -->
       <div>
-        <form method="GET">
-          <input type="search" id="site-search" name="q"
-             aria-label="Search for a specific news content">
-             <button type="submit">Search</button>
-        </form>
-      </div>
+        <input class="search_term" type="text" placeholder="Search for a specific news content">
+        <button onclick="get_search_data()" >Search</button>
+     </div>
+    <br>
           <!-- In case we do not find the required query result -->
           {% with messages = get_flashed_messages() %}  
              {% if messages %}  
@@ -23,32 +21,80 @@
              {% endif %}  
           {% endwith %}  
     <br>
-    {% for x in range(0,all_articles.articles|length,2)  %}
         <!-- Bootstrap Cards -->
-        <div class="card-deck">
-          <div class="card">
-            <img class="card-img-top" src="{{ all_articles.articles[x+0].urlToImage }} " alt="Card image cap" style="max-height: 300px;">
-            <div class="card-body">
-              <h5 class="card-title">{{ all_articles.articles[x+0].title }}</h5>
-              <p class="card-text">{{ all_articles.articles[x+0].description }}</p>
-            </div>
-            <div class="card-footer text-right">
-              <a href=" {{ all_articles.articles[x+0].url }}" target="_blank" class="btn btn-primary">Click for more</a>
-          </div>
-
-          </div>
-          <div class="card">
-            <img class="card-img-top" src="{{ all_articles.articles[x+1].urlToImage }} " alt="Card image cap" style="max-height: 300px;">
-            <div class="card-body">
-              <h5 class="card-title">{{ all_articles.articles[x+1].title }}</h5>
-              <p class="card-text">{{ all_articles.articles[x+1].description }}</p>
-            </div>
-            <div class="card-footer text-right">
-              <a href=" {{ all_articles.articles[x+1].url }}" target="_blank" class="btn btn-primary">Click for more</a>
-          </div>
+        <div class="NewsCards">
         </div>
-        <br>
-        <br>
-    {% endfor %}
-    </div>
+
+<script>
+$.get("http://localhost:5000/news/"+"finance", function (input, status) {
+        console.log("inside");
+        console.log(input);
+        $.each(input,function(j,art)
+        {
+        var content='';
+        console.log(art);
+        $.each(art,function(i,article)
+        {
+            console.log(i);
+            console.log(article);
+            if (i%2===0)
+            {
+            content+='<div class="card-deck"><div class="card"><img class="card-img-top" src="'
+            +article.urlToImage+'" alt="Card image cap" style="max-height: 300px;"><div class="card-body"><h5 class="card-title">'
+            +article.title+'</h5><p class="card-text">'
+            +article.description+'</p></div><div class="card-footer text-right"><a href="'
+            +article.url+'" target="_blank" class="morebtn btn btn-primary">Click for more</a></div></div><br><br>';
+            }
+            else
+            {
+                content+='<div class="card"><img class="card-img-top" src="'
+            +article.urlToImage+'" alt="Card image cap" style="max-height: 300px;"><div class="card-body"><h5 class="card-title">'
+            +article.title+'</h5><p class="card-text">'
+            +article.description+'</p></div><div class="card-footer text-right"><a href="'
+            +article.url+'" target="_blank" class="morebtn btn btn-primary">Click for more</a></div></div><br><br></div><br><br>';
+            }
+        });
+        $('.NewsCards').html(content);
+    });
+    });
+
+function get_search_data(search_term) {
+    var search_term = $('.search_term').val();
+    console.log(search_term);
+    $.get("http://localhost:5000/news/"+search_term, function (input, status) {
+        console.log("inside");
+        console.log(input);
+        $.each(input,function(j,art)
+        {
+        var content='';
+        console.log(art);
+        $.each(art,function(i,article)
+        {
+            console.log(i);
+            console.log(article);
+            if (i%2===0)
+            {
+            content+='<div class="card-deck"><div class="card"><img class="card-img-top" src="'
+            +article.urlToImage+'" alt="Card image cap" style="max-height: 300px;"><div class="card-body"><h5 class="card-title">'
+            +article.title+'</h5><p class="card-text">'
+            +article.description+'</p></div><div class="card-footer text-right"><a href="'
+            +article.url+'" target="_blank" class="morebtn btn btn-primary">Click for more</a></div></div><br><br>';
+            }
+            else
+            {
+                content+='<div class="card"><img class="card-img-top" src="'
+            +article.urlToImage+'" alt="Card image cap" style="max-height: 300px;"><div class="card-body"><h5 class="card-title">'
+            +article.title+'</h5><p class="card-text">'
+            +article.description+'</p></div><div class="card-footer text-right"><a href="'
+            +article.url+'" target="_blank" class="morebtn btn btn-primary">Click for more</a></div></div><br><br></div><br><br>';
+            }
+        });
+        console.log(content);
+        $('.NewsCards').html(content);
+    });
+    });
+
+}
+
+</script>
 {% endblock %}
