@@ -63,6 +63,7 @@ def render_graph_page():
 def render_news_page():
     return render_template('news.html')
 
+
 @app.route('/login')
 def render_login_signup():
     return render_template('login.html')
