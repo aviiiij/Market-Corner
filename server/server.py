@@ -1,36 +1,25 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request
 from flask_cors import CORS, cross_origin
 from newsapi import NewsApiClient
 import requests
-import random
-import string
+import sys
+import os
+from dotenv import load_dotenv
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-newsapi = NewsApiClient(api_key='6d00c7e55c784d84b0f24f28defb09a6')
-N = 20
-randomkey = ''.join(random.SystemRandom().choice(
-    string.ascii_uppercase + string.digits) for _ in range(N))
-app.secret_key = randomkey
-
-
-def all_articles(x): return (newsapi.get_everything(
-    q=x,
-    sources='bbc-news,the-verge',
-    domains='bbc.co.uk,techcrunch.com',
-    from_param='2021-12-01',
-    to='2020-12-12',
-    language='en',
-    sort_by='relevancy',
-    page=1
-))
+load_dotenv()
+TOKEN1 = os.getenv('API_KEY')
+TOKEN2 = os.getenv('ALPHA_KEY')
+newsapi = NewsApiClient(api_key=TOKEN1)
 
 
 @app.route('/<ticker>')
 def hello_world(ticker):
+
     data = requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' +
-                        ticker+'&outputsize=compact&apikey=DLNKMATBLTI7J8SR')
+                        ticker+'&outputsize=compact&apikey=TOKEN2')
     data = data.json()
     response = []
     for something in data:
@@ -46,14 +35,6 @@ def hello_world(ticker):
     return {'series': response}
 
 
-@app.route('/news/<search_term>')
-def search(search_term):
-    temp = all_articles(search_term)['articles']
-    if not temp:
-        return {'all_articles': all_articles('finance')['articles']}
-    return {'all_articles': temp}
-
-
 @app.route('/graph')
 def render_graph_page():
     return render_template('graph.html')
@@ -61,12 +42,22 @@ def render_graph_page():
 
 @app.route('/news')
 def render_news_page():
-    return render_template('news.html')
-
-
-@app.route('/login')
-def render_login_signup():
-    return render_template('login.html')
+    print(request.args.get('q'))
+    if request.args.get('q') == None:
+        query = 'finance'
+    else:
+        query = request.args.get('q')
+    all_articles = newsapi.get_everything(
+        q=query,
+        sources='bbc-news,the-verge',
+        domains='bbc.co.uk,techcrunch.com',
+        from_param='2021-12-01',
+        to='2020-12-12',
+        language='en',
+        sort_by='relevancy',
+        page=1
+    )
+    return render_template('news.html', all_articles=all_articles)
 
 
 if __name__ == '__main__':
