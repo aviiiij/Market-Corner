@@ -26,7 +26,7 @@
         </div>
 
 <script>
-$.get("http://localhost:5000/news/"+"finance", function (input, status) {
+$.get("http://localhost:5000/news?="+"finance", function (input, status) {
         console.log("inside");
         console.log(input);
         $.each(input,function(j,art)
@@ -61,7 +61,7 @@ $.get("http://localhost:5000/news/"+"finance", function (input, status) {
 function get_search_data(search_term) {
     var search_term = $('.search_term').val();
     console.log(search_term);
-    $.get("http://localhost:5000/news/"+search_term, function (input, status) {
+    $.get("http://localhost:5000/news?q="+search_term, function (input, status) {
         console.log("inside");
         console.log(input);
         $.each(input,function(j,art)
