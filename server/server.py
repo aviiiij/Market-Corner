@@ -4,7 +4,8 @@ from newsapi import NewsApiClient
 import requests
 import sys
 import os
-import sys,os
+import sys
+import os
 
 from dotenv import load_dotenv
 app = Flask(__name__)
@@ -15,26 +16,6 @@ load_dotenv()
 TOKEN1 = os.getenv('API_KEY')
 TOKEN2 = os.getenv('ALPHA_KEY')
 newsapi = NewsApiClient(api_key=TOKEN1)
-
-
-@app.route('/<ticker>')
-def hello_world(ticker):
-
-    data = requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' +
-                        ticker+'&outputsize=compact&apikey=TOKEN2')
-    data = data.json()
-    response = []
-    for something in data:
-        if something == 'Meta Data':
-            continue
-        data = data[something]
-    for a in data:
-        temp = {'timestamp': a}
-        for x in data[a]:
-            temp[x[3:]] = data[a][x]
-        response.append(temp)
-    print('complete')
-    return {'series': response}
 
 
 @app.route('/graph')
@@ -60,6 +41,31 @@ def render_news_page():
         page=1
     )
     return render_template('news.html', all_articles=all_articles)
+
+
+@app.route('/login')
+def render_login_signup():
+    return render_template('login.html')
+
+
+@app.route('/<ticker>')
+def hello_world(ticker):
+
+    data = requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' +
+                        ticker+'&outputsize=compact&apikey=TOKEN2')
+    data = data.json()
+    response = []
+    for something in data:
+        if something == 'Meta Data':
+            continue
+        data = data[something]
+    for a in data:
+        temp = {'timestamp': a}
+        for x in data[a]:
+            temp[x[3:]] = data[a][x]
+        response.append(temp)
+    print('complete')
+    return {'series': response}
 
 
 if __name__ == '__main__':
