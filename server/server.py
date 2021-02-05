@@ -4,8 +4,6 @@ from newsapi import NewsApiClient
 import requests
 import sys
 import os
-import sys
-import os
 
 from dotenv import load_dotenv
 app = Flask(__name__)

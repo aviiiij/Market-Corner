@@ -1,17 +1,19 @@
 # Market Corner
 
+Market Corner is a final semester Mini Project that aims to help the user by showing him appropriate Stock information that he/she/they wish to see.
+
+<hr> 
+
+
 ## Goals
 
-- [ ] Visualize the data from STOCK API  
+- [x] Visualize Stock Rates  
  
-  [Stock API](https://stocknewsapi.com/)
+- [x] Retrieve News relating to stock market
 
-- [ ] Retrieve News
-
-- [ ] Show Ads for Companies *(optional)* 
+- [ ] Show Ads for Companies 
 
 ## Tech Stack
 
-> Guess we can figure it out later, I just wanted to practice making a readME hehehehe..okbye :joy:
-
-![](https://media.tenor.com/images/a2741132a4f7ddf637513737364d87d9/tenor.gif)
+* Flask
+* Second Implementation Angular
