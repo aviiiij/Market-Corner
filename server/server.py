@@ -4,6 +4,8 @@ from newsapi import NewsApiClient
 import requests
 import sys
 import os
+import sys,os
+
 from dotenv import load_dotenv
 app = Flask(__name__)
 CORS(app)
