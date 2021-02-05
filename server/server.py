@@ -2,7 +2,10 @@ from flask import Flask, render_template, request
 from flask_cors import CORS, cross_origin
 from newsapi import NewsApiClient
 import requests
+import sys
+import os
 import sys,os
+
 from dotenv import load_dotenv
 app = Flask(__name__)
 CORS(app)
