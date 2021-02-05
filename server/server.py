@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS, cross_origin
 from newsapi import NewsApiClient
 import requests
@@ -18,7 +18,7 @@ newsapi = NewsApiClient(api_key=TOKEN1)
 
 @app.route('/graph')
 def render_graph_page():
-    return render_template('graph.html')
+    return render_template('graph.html', ak=TOKEN2)
 
 
 @app.route('/news')
@@ -38,8 +38,14 @@ def render_news_page():
         sort_by='relevancy',
         page=1
     )
-    return render_template('news.html', all_articles=all_articles)
+    print(len(all_articles))
+    if request.args.get('q') == None:
+        return render_template('news.html', all_articles=all_articles)
+    return jsonify(all_articles)
 
+# @app.route('/news')
+# def render_news():
+#     return render_template('news.html', all_articles=[])
 
 @app.route('/login')
 def render_login_signup():

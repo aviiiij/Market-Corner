@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block styles %}
-    <link rel="stylesheet" type="text/css" href="/static/css/graph.css">
+<link rel="stylesheet" type="text/css" href="/static/css/graph.css">
 {% endblock %}
 
 {% block content%}
@@ -10,180 +10,180 @@
 <div class="container">
     <div>
         <input class="ticker_code" type="text" placeholder="ticker_code">
-        <button onclick="get_ticker_data()" >Get data</button>
-    <div>
-    <br>
-    <div id='chart'>
-    </div>
+        <button onclick="get_ticker_data()">Get data</button>
+        <div>
+            <br>
+            <div id='chart'>
+            </div>
 
-    <div>
-        <br>
-        <div class="d-flex justify-content-around">
-            <p class="Company">IBM</p>
+            <div>
+                <br>
+                <div class="d-flex justify-content-around">
+                    <p class="Company">IBM</p>
+                </div>
+                <br>
+                <div class="d-flex justify-content-around">
+                    <span>Exchange: <p class="Exchange"></p></span>
+                    <span>Currency: <p class="Currency"></p></span>
+                    <span>Country: <p class="Country"></p></span>
+                    <span>Sector: <p class="Sector"></p></span>
+                </div>
+                <br>
+                <br>
+                <p>Company Overview</p>
+                <p class="Description">Company Description</p>
+                <br>
+                <br>
+                <div id='earnings'>
+                </div>
+            </div>
         </div>
-        <br>
-        <div class="d-flex justify-content-around">
-            <span>Exchange: <p class="Exchange"></p></span>
-            <span>Currency: <p class="Currency"></p></span>
-            <span>Country: <p class="Country"></p></span>
-            <span>Sector: <p class="Sector"></p></span>
-        </div>
-        <br>
-        <br>
-        <p>Company Overview</p>
-        <p class="Description">Company Description</p>
-        <br>
-        <br>
-        <div id='earnings'>
-        </div>
-    </div>
-</div>
 
 
-<script>
-var options = {
-          series: [{
-          data: [
-        ]
-    }],
-        chart: {
-        type: 'candlestick',
-        height: 500,
-    },
-    title: {
-        text: 'CandleStick Chart',
-        align: 'left'
-    },
-    xaxis: {
-        type: 'datetime'
-    },
-    yaxis: {
-        tooltip: {
-        enabled: true
-        }
-    }
-};
+        <script>
+            var options = {
+                series: [{
+                    data: [
+                    ]
+                }],
+                chart: {
+                    type: 'candlestick',
+                    height: 500,
+                },
+                title: {
+                    text: 'CandleStick Chart',
+                    align: 'left'
+                },
+                xaxis: {
+                    type: 'datetime'
+                },
+                yaxis: {
+                    tooltip: {
+                        enabled: true
+                    }
+                }
+            };
 
-console.log(options['series'][0]['data']);
+            console.log(options['series'][0]['data']);
 
-var chart = new ApexCharts(document.querySelector("#chart"), options);
-chart.render();
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
 
-var earnings_options = {
-        series: [{
-        name: "EPS:",
-        data: [
-        ]
-    }],
-        chart: {
-        type: 'area',
-        height: 350,
-        zoom: {
-        enabled: false
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        curve: 'straight'
-    },
-    
-    title: {
-        text: 'Annual Earnings',
-        align: 'center'
-    },
-    xaxis: {
-        type: 'datetime',
-    },
-    yaxis: {
-        opposite: true
-    },
-    legend: {
-        horizontalAlign: 'left'
-    }
-};
+            var earnings_options = {
+                series: [{
+                    name: "EPS:",
+                    data: [
+                    ]
+                }],
+                chart: {
+                    type: 'area',
+                    height: 350,
+                    zoom: {
+                        enabled: false
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'straight'
+                },
 
-var earning_chart = new ApexCharts(document.querySelector("#earnings"), earnings_options);
-earning_chart.render();
+                title: {
+                    text: 'Annual Earnings',
+                    align: 'center'
+                },
+                xaxis: {
+                    type: 'datetime',
+                },
+                yaxis: {
+                    opposite: true
+                },
+                legend: {
+                    horizontalAlign: 'left'
+                }
+            };
 
-$.get("http://localhost:5000/IBM", function (input, status) {
-        var temp = input['series'].map(x => (
-            {
-                x: new Date(x['timestamp']),
-                y: [x['open'],x['high'],x['low'],x['close']]
+            var earning_chart = new ApexCharts(document.querySelector("#earnings"), earnings_options);
+            earning_chart.render();
+
+            $.get("http://localhost:5000/IBM", function (input, status) {
+                var temp = input['series'].map(x => (
+                    {
+                        x: new Date(x['timestamp']),
+                        y: [x['open'], x['high'], x['low'], x['close']]
+                    }
+                ));
+                chart.updateSeries([{
+                    data: temp
+                }])
+
+
+            });
+
+            $.get("https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey={{ ak }}", function (input, status) {
+                console.log(input);
+                $('.Company').text(input['Name']);
+                $('.Description').text(input['Description']);
+                $('.Exchange').text(input['Exchange']);
+                $('.Currency').text(input['Currency']);
+                $('.Country').text(input['Country']);
+                $('.Sector').text(input['Sector']);
+            });
+
+            $.get("https://www.alphavantage.co/query?function=EARNINGS&symbol=IBM&apikey={{ ak }}", function (input, status) {
+                var temp = input['annualEarnings'].map(c => (
+                    {
+                        x: new Date(c['fiscalDateEnding']),
+                        y: c['reportedEPS']
+                    }
+                ))
+
+                earning_chart.updateSeries([{
+                    data: temp
+                }])
+            });
+
+            function get_ticker_data(ticker_code) {
+                var ticker_code = $('.ticker_code').val();
+                console.log(ticker_code);
+                $.get("http://localhost:5000/" + ticker_code, function (input, status) {
+                    var temp = input['series'].map(x => (
+                        {
+                            x: new Date(x['timestamp']),
+                            y: [x['open'], x['high'], x['low'], x['close']]
+                        }
+                    ));
+                    chart.updateSeries([{
+                        data: temp
+                    }])
+
+
+                });
+                $.get("https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + ticker_code + "&apikey={{ ak }}", function (input, status) {
+                    console.log(input);
+                    $('.Company').text(input['Name']);
+                    $('.Description').text(input['Description']);
+                    $('.Exchange').text(input['Exchange']);
+                    $('.Currency').text(input['Currency']);
+                    $('.Country').text(input['Country']);
+                    $('.Sector').text(input['Sector']);
+                });
+
+                $.get("https://www.alphavantage.co/query?function=EARNINGS&symbol=" + ticker_code + "&apikey={{ ak }}", function (input, status) {
+                    var temp1 = input['annualEarnings'].map(c => (
+                        {
+                            x: new Date(c['fiscalDateEnding']),
+                            y: c['reportedEPS']
+                        }
+                    ));
+                    console.log(temp1);
+                    earning_chart.updateSeries([{
+                        data: temp1
+                    }])
+                })
+
             }
-        ));
-        chart.updateSeries([{
-            data:temp
-        }])
-    
-    
-    });
-
-$.get("https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=9FAZR8MM9NGQJ5JV", function (input, status) {
-        console.log(input);
-        $('.Company').text(input['Name']);
-        $('.Description').text(input['Description']);
-        $('.Exchange').text(input['Exchange']);
-        $('.Currency').text(input['Currency']);
-        $('.Country').text(input['Country']);
-        $('.Sector').text(input['Sector']);
-    });
-
-$.get("https://www.alphavantage.co/query?function=EARNINGS&symbol=IBM&apikey=9FAZR8MM9NGQJ5JV", function (input, status) {
-    var temp = input['annualEarnings'].map(c => (
-        {
-            x: new Date(c['fiscalDateEnding']),
-            y: c['reportedEPS']
-        }
-    ))
-
-    earning_chart.updateSeries([{
-        data:temp
-    }])
-});
-
-function get_ticker_data(ticker_code) {
-    var ticker_code = $('.ticker_code').val();
-    console.log(ticker_code);
-    $.get("http://localhost:5000/"+ticker_code, function (input, status) {
-        var temp = input['series'].map(x => (
-            {
-                x: new Date(x['timestamp']),
-                y: [x['open'],x['high'],x['low'],x['close']]
-            }
-        ));
-        chart.updateSeries([{
-            data:temp
-        }])
-    
-    
-    });
-    $.get("https://www.alphavantage.co/query?function=OVERVIEW&symbol="+ticker_code+"&apikey=DLNKMATBLTI7J8SR", function (input, status) {
-        console.log(input);
-        $('.Company').text(input['Name']);
-        $('.Description').text(input['Description']);
-        $('.Exchange').text(input['Exchange']);
-        $('.Currency').text(input['Currency']);
-        $('.Country').text(input['Country']);
-        $('.Sector').text(input['Sector']);
-    });
-
-    $.get("https://www.alphavantage.co/query?function=EARNINGS&symbol="+ticker_code+"&apikey=9FAZR8MM9NGQJ5JV", function (input, status) {
-        var temp1 = input['annualEarnings'].map(c => (
-            {
-                x: new Date(c['fiscalDateEnding']),
-                y: c['reportedEPS']
-            }
-        ));
-        console.log(temp1);
-        earning_chart.updateSeries([{
-            data:temp1
-        }])
-    })
-
-}
 
 
 
@@ -195,5 +195,5 @@ function get_ticker_data(ticker_code) {
 
 
 
-</script>
-{% endblock %}
+        </script>
+        {% endblock %}
