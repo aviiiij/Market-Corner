@@ -1,43 +1,51 @@
-from flask import Flask,render_template,request
+from flask import Flask, render_template, request
 from flask_cors import CORS, cross_origin
 from newsapi import NewsApiClient
 import requests
+import sys,os
+from dotenv import load_dotenv
 app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-newsapi = NewsApiClient(api_key='6d00c7e55c784d84b0f24f28defb09a6')
+load_dotenv()
+TOKEN1 = os.getenv('API_KEY')
+TOKEN2 = os.getenv('ALPHA_KEY')
+newsapi = NewsApiClient(api_key=TOKEN1)
+
 
 @app.route('/<ticker>')
 def hello_world(ticker):
 
-    data = requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol='+ticker+'&outputsize=compact&apikey=DLNKMATBLTI7J8SR')
+    data = requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' +
+                        ticker+'&outputsize=compact&apikey=TOKEN2')
     data = data.json()
-    response=[]
+    response = []
     for something in data:
-        if something=='Meta Data':
+        if something == 'Meta Data':
             continue
-        data=data[something]
+        data = data[something]
     for a in data:
-        temp={'timestamp':a}
+        temp = {'timestamp': a}
         for x in data[a]:
-            temp[x[3:]]=data[a][x]
+            temp[x[3:]] = data[a][x]
         response.append(temp)
     print('complete')
-    return {'series':response}
+    return {'series': response}
 
 
 @app.route('/graph')
 def render_graph_page():
     return render_template('graph.html')
 
+
 @app.route('/news')
 def render_news_page():
     print(request.args.get('q'))
-    if request.args.get('q')==None:
-        query='finance'
+    if request.args.get('q') == None:
+        query = 'finance'
     else:
-        query=request.args.get('q')
+        query = request.args.get('q')
     all_articles = newsapi.get_everything(
         q=query,
         sources='bbc-news,the-verge',
@@ -50,6 +58,7 @@ def render_news_page():
     )
     return render_template('news.html', all_articles=all_articles)
 
+
 if __name__ == '__main__':
-    app.debug=True
+    app.debug = True
     app.run()
