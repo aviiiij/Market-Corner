@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS, cross_origin
+from feedgen.feed import FeedGenerator
+from flask import make_response
 from newsapi import NewsApiClient
 import requests
 import sys
 import os
+
 
 from dotenv import load_dotenv
 app = Flask(__name__)
@@ -51,6 +54,25 @@ def render_news_page():
 def render_login_signup():
     return render_template('login.html')
 
+@app.route('/rss')
+def render_rss_feed():
+    fg = FeedGenerator()
+    fg.title('Feed title')
+    fg.description('Feed description')
+    fg.link(href='http://127.0.0.1:5000/news')
+    rssfeed  = fg.rss_str(pretty=True) # Get the RSS feed as string
+    fg.rss_file('rss.xml') # Write the RSS feed to a file
+    all_articles = newsapi.get_everything(
+        q='bitcoin',
+        sources='bbc-news,the-verge',
+        domains='bbc.co.uk,techcrunch.com',
+        from_param='2021-12-01',
+        to='2020-12-12',
+        language='en',
+        sort_by='relevancy',
+        page=1
+    )
+    return render_template('feed.html',rssfeed=rssfeed,all_articles = all_articles)
 
 @app.route('/<ticker>')
 def hello_world(ticker):
