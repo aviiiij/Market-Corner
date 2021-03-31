@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { candlestick,json,series,stamp,metadata } from './candle';
+import { series, companyData } from './structures';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
@@ -9,10 +9,15 @@ export class StockDataService {
 
   constructor(private http: HttpClient) { }
 
-  getHeroes(ticker: string): Observable<series> {
+  getSeries(ticker: string): Observable<series> {
     console.log(ticker);
-    return this.http.get<series>('http://127.0.0.1:5000/'+ticker) ;
+    return this.http.get<series>('http://localhost:3000/api/series/'+ticker) ;
 
     
+  }
+
+  getCompanyData(ticker: string): Observable<companyData> {
+    console.log(ticker);
+    return this.http.get<companyData>('http://localhost:3000/api/overview/'+ticker);
   }
 }

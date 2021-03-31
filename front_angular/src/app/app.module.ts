@@ -6,13 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { NgApexchartsModule } from "ng-apexcharts";
-import * as bootstrap from "bootstrap";
+import { GraphPageComponent } from './graph-page/graph-page.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GraphPageComponent
   ],
   imports: [
     BrowserModule,
