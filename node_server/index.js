@@ -18,7 +18,7 @@ app.use(cors());
 const alpha1 = process.env.alpha1;
 const alpha2 = process.env.alpha2;
 const alpha3 = process.env.alpha3;
-
+console.log(alpha1);
 
 app.get('/news', (req, res) => {
     if (req.cookies['stock_code']) {

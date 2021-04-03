@@ -1,1 +1,10 @@
-  <app-graph-page></app-graph-page>
+<h1>Angular Router App</h1>
+<!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) -->
+<nav>
+  <ul>
+    <li><a routerLink="/analyse" routerLinkActive="active">Stock Analyzer</a></li>
+    <li><a routerLink="/news" routerLinkActive="active">News</a></li>
+  </ul>
+</nav>
+<!-- The routed views render in the <router-outlet>-->
+<router-outlet></router-outlet>

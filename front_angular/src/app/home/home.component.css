@@ -1,0 +1,27 @@
+.con {
+    margin-right: 10%;
+    margin-right: 10%;
+}
+
+.row {
+    height: 600px;
+    margin: 0px;
+    text-align: center;
+}
+
+.header {
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 150px;
+}
+
+.sub-header {
+    font-size: 25px;
+}
+
+.img-container {
+    background-image: url("https://image.freepik.com/free-vector/learn-analyze-online-trading-flat-illustration-design_310941-16.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: auto;
+}

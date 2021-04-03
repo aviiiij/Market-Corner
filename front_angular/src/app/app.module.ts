@@ -7,13 +7,17 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { GraphPageComponent } from './graph-page/graph-page.component';
+import { HomeComponent } from './home/home.component';
+import { NewsPageComponent } from './news-page/news-page.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    GraphPageComponent
+    GraphPageComponent,
+    HomeComponent,
+    NewsPageComponent
   ],
   imports: [
     BrowserModule,
