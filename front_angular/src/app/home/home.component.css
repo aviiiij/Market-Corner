@@ -25,3 +25,13 @@
     background-repeat: no-repeat;
     background-position: auto;
 }
+
+.col-md-4 {
+    text-align: center;
+}
+
+p {
+    border-radius: 10px;
+    margin: 5px 0px 5px 0px;
+    padding: 10x;
+}

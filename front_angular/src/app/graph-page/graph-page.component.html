@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
 <div class="container " >
-  <input [(ngModel)]="ticker" placeholder="name"/>
+  <input [(ngModel)]="ticker" placeholder="Code"/>
   <br>
   <button (click)="search()">Search..</button>
   <br>
@@ -22,13 +22,13 @@
   </div>
   <div class="row d-flex justify-content-around">
     <div class="col-md-4 " >
-        <p class="bg-success" style="padding: 10px;font-weight:600;color:white">Exchange: {{companyExchange}}</p>
+        <p class="bg-success pill" >Exchange: {{companyExchange}}</p>
     </div>
     <div class="col-md-4">
-        <p class="bg-warning" style="padding: 10px;font-weight:600;color:white">Currency: {{companyCurrency}}</p>
+        <p class="bg-warning pill" >Currency: {{companyCurrency}}</p>
     </div>
     <div class="col-md-4">
-        <p class="bg-info" style="padding: 10px;font-weight:600;color:white">Sector: {{companySector}}</p>
+        <p class="bg-info pill" >Sector: {{companySector}}</p>
     </div>
   </div>
   <div style="margin-top:30px;font-size:15px;font-weight:500;">

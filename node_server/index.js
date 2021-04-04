@@ -5,6 +5,8 @@ const https = require('https')
 const { appendFile } = require('fs')
 var cookieParser = require('cookie-parser');
 const cors = require('cors');
+const NewsAPI = require('newsapi');
+
 
 const app = express()
 const port = 3000
@@ -18,15 +20,29 @@ app.use(cors());
 const alpha1 = process.env.alpha1;
 const alpha2 = process.env.alpha2;
 const alpha3 = process.env.alpha3;
-console.log(alpha1);
+const newsKey = process.env.news_api_key
 
-app.get('/news', (req, res) => {
-    if (req.cookies['stock_code']) {
-        console.log(req.cookies['stock_code']);
-        res.send('Too many cookies are bad for health');
-    } else {
-        res.cookie('stock_code', 'AMZN').send('Here have a cookie');
-    }
+const newsapi = new NewsAPI(newsKey);
+
+
+app.get('/news/:query', (req, res) => {
+    newsapi.v2.everything({
+        q: req.params.query,
+        language: 'en',
+        sortBy: 'relevancy',
+        pageSize: 10,
+        page: 1
+    }).then(response => {
+        result = { newsholder: response.articles }
+        console.log(result);
+        res.status(200).send(result);
+        /*
+          {
+            status: "ok",
+            articles: [...]
+          }
+        */
+    });
 
 })
 

@@ -9,6 +9,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
 import { GraphPageComponent } from './graph-page/graph-page.component';
 import { HomeComponent } from './home/home.component';
 import { NewsPageComponent } from './news-page/news-page.component';
+import { NewsModifierPipe } from './news-modifier.pipe';
 
 
 
@@ -17,7 +18,8 @@ import { NewsPageComponent } from './news-page/news-page.component';
     AppComponent,
     GraphPageComponent,
     HomeComponent,
-    NewsPageComponent
+    NewsPageComponent,
+    NewsModifierPipe
   ],
   imports: [
     BrowserModule,

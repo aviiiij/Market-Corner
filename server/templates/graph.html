@@ -121,7 +121,7 @@ $.get("http://localhost:5000/IBM", function (input, status) {
     
     });
 
-$.get("https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=9FAZR8MM9NGQJ5JV", function (input, status) {
+$.get("https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=", function (input, status) {
         console.log(input);
         $('.Company').text(input['Name']);
         $('.Description').text(input['Description']);
@@ -131,7 +131,7 @@ $.get("https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=9FA
         $('.Sector').text(input['Sector']);
     });
 
-$.get("https://www.alphavantage.co/query?function=EARNINGS&symbol=IBM&apikey=9FAZR8MM9NGQJ5JV", function (input, status) {
+$.get("https://www.alphavantage.co/query?function=EARNINGS&symbol=IBM&apikey=", function (input, status) {
     var temp = input['annualEarnings'].map(c => (
         {
             x: new Date(c['fiscalDateEnding']),
@@ -160,7 +160,7 @@ function get_ticker_data(ticker_code) {
     
     
     });
-    $.get("https://www.alphavantage.co/query?function=OVERVIEW&symbol="+ticker_code+"&apikey=DLNKMATBLTI7J8SR", function (input, status) {
+    $.get("https://www.alphavantage.co/query?function=OVERVIEW&symbol="+ticker_code+"&apikey=", function (input, status) {
         console.log(input);
         $('.Company').text(input['Name']);
         $('.Description').text(input['Description']);
@@ -170,7 +170,7 @@ function get_ticker_data(ticker_code) {
         $('.Sector').text(input['Sector']);
     });
 
-    $.get("https://www.alphavantage.co/query?function=EARNINGS&symbol="+ticker_code+"&apikey=9FAZR8MM9NGQJ5JV", function (input, status) {
+    $.get("https://www.alphavantage.co/query?function=EARNINGS&symbol="+ticker_code+"&apikey=", function (input, status) {
         var temp1 = input['annualEarnings'].map(c => (
             {
                 x: new Date(c['fiscalDateEnding']),

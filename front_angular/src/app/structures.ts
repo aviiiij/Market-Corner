@@ -25,3 +25,18 @@ export interface companyData {
     currency : string,
     sector : string
 }
+
+export interface news {
+    source : string,
+    author : string,
+    title : string,
+    description : string,
+    url : string,
+    urlToImage : string,
+    publishedAt : Date,
+    content : string
+}
+
+export interface newsData {
+    newsholder : news[]
+}

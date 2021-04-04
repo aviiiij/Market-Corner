@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from "@angular/common";
+import { news } from '../structures';
+import {StockDataService} from '../stock-data.service';
 
 @Component({
   selector: 'app-news-page',
@@ -7,12 +9,25 @@ import { CommonModule } from "@angular/common";
   styleUrls: ['./news-page.component.css']
 })
 export class NewsPageComponent implements OnInit {
-  x: number[] =[1,2,3];
-  constructor() { }
+  all_news: news[] = [];
+  constructor(private stockService: StockDataService) { }
 
   ngOnInit(): void {
+    this.getData();
   }
 
-  
+  getData(): void {
+    const _this = this;
+    this.stockService.getNewsData(this.query)
+        .subscribe(values => {
+            this.all_news = values.newsholder;
+          }
+        ); 
+  }
+  query='IBM';
+
+  search(): void {
+    this.getData();
+  }
 
 }

@@ -6,12 +6,12 @@ app = Flask(__name__)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-newsapi = NewsApiClient(api_key='6d00c7e55c784d84b0f24f28defb09a6')
+newsapi = NewsApiClient(api_key='')
 
 @app.route('/<ticker>')
 def hello_world(ticker):
 
-    data = requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol='+ticker+'&outputsize=compact&apikey=DLNKMATBLTI7J8SR')
+    data = requests.get('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol='+ticker+'&outputsize=compact&apikey=')
     data = data.json()
     response=[]
     for something in data:
