@@ -1,10 +1,23 @@
-<h1>Angular Router App</h1>
-<!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) -->
-<nav>
-  <ul>
-    <li><a routerLink="/analyse" routerLinkActive="active">Stock Analyzer</a></li>
-    <li><a routerLink="/news" routerLinkActive="active">News</a></li>
-  </ul>
+<nav class="navbar navbar-expand-md navbar-light bg-light partition">
+    <a href="#" class="navbar-brand">
+        Market Corner
+    </a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav">
+            <a routerLink="/home" routerLinkActive="active" class="nav-item nav-link">Home</a>
+            <a routerLink="/analyse" routerLinkActive="active" class="nav-item nav-link">Stock Analyzer</a>
+            <a routerLink="/news" routerLinkActive="active" class="nav-item nav-link">News</a>
+        </div>
+        <div class="navbar-nav ml-auto">
+            <a href="#" class="nav-item nav-link">Login</a>
+        </div>
+    </div>
 </nav>
+
+ 
 <!-- The routed views render in the <router-outlet>-->
 <router-outlet></router-outlet>

@@ -1,12 +1,19 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
 <div class="container " >
-  <input [(ngModel)]="ticker" placeholder="Code"/>
-  <br>
-  <button (click)="search()">Search..</button>
-  <br>
+  <div class="row search">
+        <span class="search-space">
+            <input [(ngModel)]="ticker" class="form-control" placeholder="Code">
+        </span>
+        <span class="search-space">
+            <button (click)="search()" placeholder="Topic" class="btn btn-primary mb-2">Search</button>
+        </span>
+    </div>
+
+
+
   <div style="text-align: center">
-  <p>{{ticker}}</p>
+    <p>{{ticker}}</p>
   </div>
   <div style="background: lightgrey;">
     <apx-chart

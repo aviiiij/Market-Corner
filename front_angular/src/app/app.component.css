@@ -1,0 +1,9 @@
+.partition {
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .partition {
+        margin-bottom: 0px;
+    }
+}

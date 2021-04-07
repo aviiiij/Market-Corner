@@ -1,6 +1,5 @@
 .con {
-    margin-right: 10%;
-    margin-right: 10%;
+    margin-top: 10px;
 }
 
 .row {
@@ -21,17 +20,20 @@
 
 .img-container {
     background-image: url("https://image.freepik.com/free-vector/learn-analyze-online-trading-flat-illustration-design_310941-16.jpg");
-    background-size: contain;
     background-repeat: no-repeat;
     background-position: auto;
+    height: 500px;
 }
 
-.col-md-4 {
-    text-align: center;
-}
-
-p {
-    border-radius: 10px;
-    margin: 5px 0px 5px 0px;
-    padding: 10x;
+@media only screen and (max-width: 600px) {
+    .img-container {
+        background-image: url("https://image.freepik.com/free-vector/learn-analyze-online-trading-flat-illustration-design_310941-16.jpg");
+        background-repeat: no-repeat;
+        background-position: auto;
+        height: 300px;
+        background-size: cover;
+    }
+    .header {
+        margin-top: 50px;
+    }
 }
