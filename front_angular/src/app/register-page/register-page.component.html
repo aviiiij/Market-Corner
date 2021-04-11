@@ -1,0 +1,16 @@
+<div class="container">
+    <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+        {{user | json}}
+        <hr/>
+        <label>Name</label>
+        <input class="trial" type="text" required #name="ngModel" [class.is-valid]="name.valid && name.dirty" [class.is-invalid]="name.invalid && name.touched" class="form-control" name="name" [(ngModel)]="user.name">
+        <label>Email</label>
+        <input type="email" required #email="ngModel" [class.is-valid]="email.valid && email.dirty" [class.is-invalid]="email.invalid && email.touched" class="form-control" name="email" [(ngModel)]="user.email">
+        <label>Password</label>
+        <input type="text" required #password="ngModel" [class.is-valid]="password.valid && password.dirty" [class.is-invalid]="password.invalid && password.touched" class="form-control" name="password" [(ngModel)]="user.password">
+        <label>Phone</label>
+        <input type="text" required #phone="ngModel" [class.is-valid]="phone.valid && phone.dirty" [class.is-invalid]="phone.invalid && phone.touched" class="form-control" name="phone" [(ngModel)]="user.phone">
+        <button type="submit" class="btn btn-primary" [disabled]="userForm.form.invalid "> Submit </button>
+    
+    </form>
+</div>
