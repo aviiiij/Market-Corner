@@ -1,5 +1,6 @@
 import { TitleCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 import { loggedInUser } from '../login-page/login-page.component';
 
@@ -10,7 +11,7 @@ import { loggedInUser } from '../login-page/login-page.component';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private authservice: AuthServiceService) { }
+  constructor(private authservice: AuthServiceService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -43,6 +44,9 @@ export class ProfileComponent implements OnInit {
     var id = this.user.id;
     console.log('function');
     console.log(id);
-    this.authservice.deleteUser(id);
+    this.authservice.deleteUser(id).subscribe(data => {});
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('user');
+    this.router.navigate(['register']);
   }
 }

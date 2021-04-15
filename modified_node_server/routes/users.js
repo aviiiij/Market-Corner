@@ -61,7 +61,7 @@ router.post('/authenticate', (req, res, next) => {
 });
 
 router.post('/trial', (req, res, next) => {
-    console.log('request');
+    res.send("trialll");
 
 });
 
@@ -69,11 +69,11 @@ router.post('/deleteye', (req, res) => {
     console.log('delete');
     const id = req.body.id;
     console.log(id);
-    User.findByIdAndDelete(id, function(err, result) {
+    console.log(req.body);
+    User.deleteOne({ _id: id }, function(err, result) {
         if (err) {
-            res.send(err);
+            console.log(err);
         } else {
-            console.log(result);
             res.send(result);
         }
     });

@@ -12,7 +12,7 @@ import 'rxjs/Rx';
   providedIn: 'root'
 })
 export class AuthServiceService {
-  authToken: string = "";
+  authToken: any = "";
   user:any;
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -43,14 +43,21 @@ export class AuthServiceService {
   }
 
   updateUser(changeUser:any) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
     return this.http.post<any>('http://localhost:3000/users/update', changeUser);
     
   }
 
+  loadToken() {
+    const token = localStorage.getItem('id_token');
+    this.authToken = token;
+  }
+
   deleteUser(id:string) {
     console.log(id);
-    this.http.post('http://localhost:3000/users/deleteye', id);
-    //this.router.navigate(['register']);
+    return this.http.post('http://localhost:3000/users/deleteye', {"id":id});
 
   }
 }
