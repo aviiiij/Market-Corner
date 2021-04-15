@@ -10,6 +10,7 @@
 # dependencies
 /node_modules
 /node_server/node_modules
+/modified_node_server/node_modules
 /front_angular/node_modules
 
 # profiling files

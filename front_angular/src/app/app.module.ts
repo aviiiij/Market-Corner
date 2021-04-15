@@ -11,6 +11,8 @@ import { HomeComponent } from './home/home.component';
 import { NewsPageComponent } from './news-page/news-page.component';
 import { NewsModifierPipe } from './news-modifier.pipe';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -22,7 +24,9 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     HomeComponent,
     NewsPageComponent,
     NewsModifierPipe,
-    RegisterPageComponent
+    RegisterPageComponent,
+    LoginPageComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

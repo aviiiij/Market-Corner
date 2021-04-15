@@ -27,10 +27,11 @@ router.post('/register', (req, res, next) => {
 
 // Authenticate
 router.post('/authenticate', (req, res, next) => {
-    const username = req.body.username;
+    console.log(req.body);
+    const email = req.body.email;
     const password = req.body.password;
-
-    User.getUserByUsername(username, (err, user) => {
+    console.log(email);
+    User.getUserByEmail(email, (err, user) => {
         if (err) throw err;
         if (!user) {
             return res.json({ success: false, msg: 'User not found' });
@@ -58,6 +59,46 @@ router.post('/authenticate', (req, res, next) => {
         });
     });
 });
+
+router.post('/trial', (req, res, next) => {
+    console.log('request');
+
+});
+
+router.post('/deleteye', (req, res) => {
+    console.log('delete');
+    const id = req.body.id;
+    console.log(id);
+    User.findByIdAndDelete(id, function(err, result) {
+        if (err) {
+            res.send(err);
+        } else {
+            console.log(result);
+            res.send(result);
+        }
+    });
+
+
+});
+
+router.post('/update', (req, res, next) => {
+    const name = req.body.name;
+    const phone = req.body.phone;
+    const email = req.body.email;
+    const id = req.body.id;
+    console.log(name);
+    User.findByIdAndUpdate(id, { 'name': name, 'email': email, 'phone': phone }, function(err, result) {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send(result);
+        }
+    })
+
+
+});
+
+
 
 // Profile
 router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res, next) => {

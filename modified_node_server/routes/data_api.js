@@ -12,7 +12,7 @@ const alpha3 = process.env.alpha3;
 const newsKey = process.env.news_api_key;
 console.log(alpha1);
 
-//const newsapi = new NewsAPI(newsKey);
+const newsapi = new NewsAPI(newsKey);
 
 
 // Register
@@ -25,7 +25,6 @@ router.get('/news/:query', (req, res) => {
         page: 1
     }).then(response => {
         result = { newsholder: response.articles }
-        console.log(result);
         res.status(200).send(result);
         /*
           {
