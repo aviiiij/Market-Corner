@@ -24,7 +24,7 @@ const newsKey = process.env.news_api_key
 
 const newsapi = new NewsAPI(newsKey);
 
-
+console.log('something')
 app.get('/news/:query', (req, res) => {
     newsapi.v2.everything({
         q: req.params.query,
