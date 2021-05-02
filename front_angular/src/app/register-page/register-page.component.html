@@ -1,7 +1,19 @@
 <div class="container">
     <form #userForm="ngForm" (ngSubmit)="onSubmit()">
-        {{user | json}}
-        <hr/>
+        <div class="row justify-content-around">
+            <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> You are now registered and you can proceed to login.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="failure" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> An error occured please try again later.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
         <label>Name</label>
         <input class="trial" type="text" required #name="ngModel" [class.is-valid]="name.valid && name.dirty" [class.is-invalid]="name.invalid && name.touched" class="form-control" name="name" [(ngModel)]="user.name" value="{{user.name | titlecase}}">
         <label>Email</label>

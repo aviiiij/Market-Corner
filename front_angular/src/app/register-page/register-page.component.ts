@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from '../auth-service.service';
+import { CommonModule } from '@angular/common';  
 
 export interface User {
   name : string,
@@ -30,8 +31,22 @@ export class RegisterPageComponent implements OnInit {
     phone : 123456789
   };
 
+  success= false;
+  failure=false;
+
   onSubmit () {
     console.log(this.user);
-    this.authservice.registerUser(this.user).subscribe(values => console.log(values));
+    this.authservice.registerUser(this.user).subscribe(values => {
+      console.log(values.success);
+      if (values.success) {
+        console.log(values.success);
+        this.success=true;
+        this.failure=false;
+      }
+      else {
+        this.failure=true;
+        this.success=false;
+      }
+    });
   }
 }
