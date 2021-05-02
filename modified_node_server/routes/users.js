@@ -67,42 +67,52 @@ router.post('/trial', (req, res, next) => {
 
 router.post('/deleteye', (req, res) => {
     console.log('delete');
-    const id = req.body.id;
-    console.log(id);
-    console.log(req.body);
-    User.deleteOne({ _id: id }, function(err, result) {
+    candidateToken = req.get("authorization");
+    candidateToken = candidateToken.slice(4);
+    console.log(candidateToken);
+    jwt.verify(candidateToken, config.secret, function(err, decoded) {
         if (err) {
             console.log(err);
-        } else {
-            res.send(result);
         }
+        console.log(decoded.data._id); // bar
+        User.deleteOne({ _id: decoded.data._id }, function(err, result) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+        });
     });
+
 
 
 });
 
 router.post('/update', (req, res, next) => {
+    candidateToken = req.get("authorization");
     const name = req.body.name;
     const phone = req.body.phone;
     const email = req.body.email;
     const id = req.body.id;
-    console.log(name);
-    User.findByIdAndUpdate(id, { 'name': name, 'email': email, 'phone': phone }, function(err, result) {
+    candidateToken = candidateToken.slice(4);
+    jwt.verify(candidateToken, config.secret, function(err, decoded) {
         if (err) {
-            res.send(err);
-        } else {
-            res.send(result);
+            console.log(err);
         }
-    })
+        console.log(decoded.data._id); // bar
+        User.findByIdAndUpdate(decoded.data._id, { 'name': name, 'email': email, 'phone': phone }, function(err, result) {
+            if (err) {
+                res.send(err);
+            } else {
+                res.send(result);
+            }
+        })
+    });
+
+
 
 
 });
 
-
-
-// Profile
-router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    res.json({ user: req.user });
-});
 
 module.exports = router;
