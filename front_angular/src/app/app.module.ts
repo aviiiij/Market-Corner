@@ -1,4 +1,3 @@
-import { GoogleChartsModule } from 'angular-google-charts';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,7 +30,6 @@ import { ProfileComponent } from './profile/profile.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    GoogleChartsModule,
     HttpClientModule,
     FormsModule,
     NgApexchartsModule
