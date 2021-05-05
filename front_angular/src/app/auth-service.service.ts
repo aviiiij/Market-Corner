@@ -17,11 +17,11 @@ export class AuthServiceService {
   constructor(private http: HttpClient, private router: Router) { }
 
   registerUser(user:User){
-    return this.http.post<any>('http://localhost:3000/users/register', user);
+    return this.http.post<any>('https://marketcornerbackend.herokuapp.com/users/register', user);
   }
 
   authenticateUser(creds: creds) {
-    return this.http.post<any>('http://localhost:3000/users/authenticate', creds);
+    return this.http.post<any>('https://marketcornerbackend.herokuapp.com/users/authenticate', creds);
   }
 
   storeUserData(token: string, user: loggedInUser) {
@@ -45,10 +45,9 @@ export class AuthServiceService {
     this.loadToken();
     let headers = new HttpHeaders()
     .set('Authorization', this.authToken)
-    .set('Content-Type', 'application/json');
     
     console.log(headers);
-    return this.http.post<any>('http://localhost:3000/users/update', changeUser, {headers: headers});
+    return this.http.post<any>('https://marketcornerbackend.herokuapp.com/users/update', changeUser, {headers: headers});
     
   }
 
@@ -61,8 +60,7 @@ export class AuthServiceService {
     this.loadToken();
     let headers = new HttpHeaders()
     .set('Authorization', this.authToken)
-    .set('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/users/deleteye', {"id":id}, {headers: headers});
+    return this.http.post('https://marketcornerbackend.herokuapp.com/users/deleteye', {"id":id}, {headers: headers});
 
   }
 }

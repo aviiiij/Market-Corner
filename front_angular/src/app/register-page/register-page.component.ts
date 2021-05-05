@@ -33,11 +33,11 @@ export class RegisterPageComponent implements OnInit {
 
   success= false;
   failure=false;
-
+  message=""
   onSubmit () {
     console.log(this.user);
     this.authservice.registerUser(this.user).subscribe(values => {
-      console.log(values.success);
+      console.log(values);
       if (values.success) {
         console.log(values.success);
         this.success=true;
@@ -46,7 +46,9 @@ export class RegisterPageComponent implements OnInit {
       else {
         this.failure=true;
         this.success=false;
+        this.message = values.msg;
       }
+      
     });
   }
 }

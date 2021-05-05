@@ -12,6 +12,7 @@ import { NewsModifierPipe } from './news-modifier.pipe';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './auth,guard';
 
 
 
@@ -34,7 +35,7 @@ import { ProfileComponent } from './profile/profile.component';
     FormsModule,
     NgApexchartsModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

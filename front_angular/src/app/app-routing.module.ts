@@ -6,14 +6,15 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { NewsPageComponent } from './news-page/news-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { AuthGuard } from './auth,guard'
 
 const routes: Routes = [
-  { path: 'analyse', component: GraphPageComponent },
-  { path: 'news', component: NewsPageComponent},
+  { path: 'analyse', component: GraphPageComponent, canActivate:[AuthGuard] },
+  { path: 'news', component: NewsPageComponent, canActivate:[AuthGuard]},
   { path: 'home', component: HomeComponent},
   { path: 'register', component: RegisterPageComponent},
   { path: 'login', component: LoginPageComponent},
-  { path: 'profile', component: ProfileComponent},
+  { path: 'profile', component: ProfileComponent, canActivate:[AuthGuard]},
   { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
