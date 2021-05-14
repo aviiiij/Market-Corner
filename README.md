@@ -22,11 +22,26 @@
 ![image](https://user-images.githubusercontent.com/43349094/118336873-2b090080-b530-11eb-8dc6-3f400f61b9b9.png)
 
 ## Run it on your system
+1. Clone the repository on your local machine
 
-- `git clone https://github.com/aviiiij/Market-Corner/`
-- `cd Market-Corner`
-- `npm install`
-- `cd frontend-angular`
-- `ng serve`
-- `cd ../server`
-- `node server.js`
+ ```git clone https://github.com/aviiiij/Market-Corner/```
+ 
+2. Navigate to the repository
+
+```cd Market-Corner```
+
+3. Install necessary Node Modules
+
+```npm install```
+
+4. Navigate to the frontend folder and run locally
+
+```cd frontend-angular```
+
+```ng serve```
+
+5. Navigate to the Server folder and start Node Server File
+
+```cd ../server```
+
+```node server.js```
