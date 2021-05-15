@@ -10,7 +10,7 @@ const alpha1 = process.env.alpha1;
 const alpha2 = process.env.alpha2;
 const alpha3 = process.env.alpha3;
 const newsKey = process.env.news_api_key;
-console.log(alpha1);
+//console.log(alpha1);
 
 const newsapi = new NewsAPI(newsKey);
 

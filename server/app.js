@@ -22,7 +22,7 @@ const data_apis = require("./routes/data_api");
 
 
 // Connect To Database (OLD CODE)
-mongoose.connect(config.database, { useMongoClient: true });
+mongoose.connect(config.database, { useNewUrlParser: true });
 // On Connection
 mongoose.connection.on('connected', () => {
     console.log('Connected to Database ' + config.database);

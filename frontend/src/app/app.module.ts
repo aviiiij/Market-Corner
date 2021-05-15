@@ -13,6 +13,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './auth,guard';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -33,7 +34,8 @@ import { AuthGuard } from './auth,guard';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    RouterModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
