@@ -17,11 +17,11 @@ export class AuthServiceService {
   constructor(private http: HttpClient, private router: Router) { }
 
   registerUser(user:User){
-    return this.http.post<any>('https://marketcornerbackend.herokuapp.com/users/register', user);
+    return this.http.post<any>('https://marketcorner.herokuapp.com/users/register', user);
   }
 
   authenticateUser(creds: creds) {
-    return this.http.post<any>('https://marketcornerbackend.herokuapp.com/users/authenticate', creds);
+    return this.http.post<any>('https://marketcorner.herokuapp.com/users/authenticate', creds);
   }
 
   storeUserData(token: string, user: loggedInUser) {
@@ -47,7 +47,7 @@ export class AuthServiceService {
     .set('Authorization', this.authToken)
     
     console.log(headers);
-    return this.http.post<any>('https://marketcornerbackend.herokuapp.com/users/update', changeUser, {headers: headers});
+    return this.http.post<any>('https://marketcorner.herokuapp.com/users/update', changeUser, {headers: headers});
     
   }
 
@@ -60,7 +60,7 @@ export class AuthServiceService {
     this.loadToken();
     let headers = new HttpHeaders()
     .set('Authorization', this.authToken)
-    return this.http.post('https://marketcornerbackend.herokuapp.com/users/deleteye', {"id":id}, {headers: headers});
+    return this.http.post('https://marketcorner.herokuapp.com/users/deleteye', {"id":id}, {headers: headers});
 
   }
 }
