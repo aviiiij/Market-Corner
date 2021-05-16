@@ -1,0 +1,19 @@
+.pill {
+    border-radius: 15px;
+    text-align: center;
+    padding: 10px;
+    font-weight: 600;
+    color: white;
+}
+
+.search {
+    padding-left: 10px;
+}
+
+.search-space {
+    margin-right: 20px;
+}
+
+.news-holder {
+    margin: 20px 0px 20px 0px;
+}

@@ -1,0 +1,34 @@
+<div class="container">
+    <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row justify-content-around">
+            <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> You are now registered and you can proceed to login.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div *ngIf="failure" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        <br>
+        <label>Name</label>
+        <input class="trial" type="text" required #name="ngModel" [class.is-valid]="name.valid && name.dirty" [class.is-invalid]="name.invalid && name.touched" class="form-control" name="name" [(ngModel)]="user.name" value="{{user.name | titlecase}}">
+        <br>
+        <label>Email</label>
+        <input type="email" required #email="ngModel" [class.is-valid]="email.valid && email.dirty" [class.is-invalid]="email.invalid && email.touched" class="form-control" name="email" [(ngModel)]="user.email">
+        <br>
+        <label>Password</label>
+        <input type="password" required #password="ngModel" [class.is-valid]="password.valid && password.dirty" [class.is-invalid]="password.invalid && password.touched" class="form-control" name="password" [(ngModel)]="user.password">
+        <br>
+        <label>Phone</label>
+        <input type="text" required #phone="ngModel" [class.is-valid]="phone.valid && phone.dirty" [class.is-invalid]="phone.invalid && phone.touched" class="form-control" name="phone" [(ngModel)]="user.phone">
+        
+        <br>
+        <button type="submit" class="btn btn-primary" [disabled]="userForm.form.invalid "> Submit </button>
+    
+    </form>
+</div>

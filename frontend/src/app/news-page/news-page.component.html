@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row search">
+        <span class="search-space">
+            <input [(ngModel)]="query" class="form-control" placeholder="IBM">
+        </span>
+        <span class="search-space">
+            <button (click)="search()" placeholder="Topic" class="btn btn-primary mb-2">Search</button>
+        </span>
+    </div>
+    <div class="row news-holder" *ngFor="let strip of all_news | newsModifier">
+        <div class="col-md" *ngFor="let news_obj of strip">
+            <div class="card" >
+                <img class="card-img-top" src="{{ news_obj.urlToImage }}" alt="Card image" style="width:100%">
+                <div class="card-body">
+                <h4 class="card-title">{{ news_obj.title }}</h4>
+                <p class="card-text">{{ news_obj.description }}</p>
+                <a href="{{ news_obj.url }}" class="btn btn-primary">Click for more</a>
+            </div>
+        </div>
+    </div>
+</div>

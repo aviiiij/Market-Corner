@@ -1,0 +1,37 @@
+<br>
+
+<div *ngIf="!editable" class="container d-flex justify-content-around" >
+    <div class="col-8">
+        <h2> User Profile    <i class="fa fa-user"></i></h2>
+        <br>
+        <p> Name :  {{user.name | titlecase}} </p>
+        <br>
+        <p> Email :  {{user.email}}</p>
+        <br>
+        <p> Phone :  {{user.phone}} </p>
+        <br>
+        <div class="row d-flex justify-content-end button-holder">
+            <button class="btn btn-primary" (click)="toggleEdit()"> Edit </button>
+            <span style="margin-left: 20px;"> </span>
+            <button class="btn btn-danger" (click)="delete()"> Delete Account </button>
+        </div>
+    </div>
+</div>
+<div *ngIf="editable" class="container d-flex justify-content-around" >
+    <div class="col-8">
+        <h2> User Profile    <i class="fa fa-user"></i></h2>
+        <br>
+        <p> Name   <input type="text" name="name" value="{{formUser.name | titlecase}}" class="form-control" [(ngModel)]="formUser.name"> </p>
+        <br>
+        <p> Email   <input type="text" name="email" value="{{formUser.email }}" class="form-control" [(ngModel)]="formUser.email"></p>
+        <br>
+        <p> Phone   <input type="text" name="phone" value="{{formUser.phone }}" class="form-control" [(ngModel)]="formUser.phone"> </p>
+        <br>
+        <div class="row d-flex justify-content-end button-holder">
+            <button class="btn btn-danger" (click)="toggleEdit()"> Cancel </button>
+            <span class="spacer"> </span>
+            <button class="btn btn-primary" (click)="submit()"> Change </button>
+        </div>
+
+    </div>
+</div>

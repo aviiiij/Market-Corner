@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light partition">
+    <a href="#" class="navbar-brand">
+        Market Corner
+    </a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav">
+            <a routerLink="/home" routerLinkActive="active" class="nav-item nav-link">Home</a>
+            <a routerLink="/analyse" routerLinkActive="active" class="nav-item nav-link">Stock Analyzer</a>
+            <a routerLink="/news" routerLinkActive="active" class="nav-item nav-link">News</a>
+        </div>
+        <div class="navbar-nav ml-auto">
+            <a *ngIf="authservice.loggedIn()" routerLink="/profile" routerLinkActive="active" class="nav-item nav-link" style="border: 2px solid black; border-radius: 50%; width:44px; text-align: center;"><i class="fa fa-user"></i></a>
+            <a *ngIf="!authservice.loggedIn()" routerLink="/login" routerLinkActive="active" class="nav-item nav-link">Login</a>
+            <a *ngIf="!authservice.loggedIn()" routerLink="/register" routerLinkActive="active" class="nav-item nav-link">Register</a>
+            <a *ngIf="authservice.loggedIn()" routerLinkActive="active" (click)="authservice.logoutUser()" class="nav-item nav-link">Logout</a>
+        </div>
+    </div>
+</nav>
+
+ 
+<!-- The routed views render in the <router-outlet>-->
+<router-outlet></router-outlet>

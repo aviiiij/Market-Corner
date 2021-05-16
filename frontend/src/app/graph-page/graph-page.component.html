@@ -1,0 +1,55 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<div class="container " >
+  <div class="row search">
+        <span class="search-space">
+            <input [(ngModel)]="ticker" class="form-control" placeholder="Code">
+        </span>
+        <span class="search-space">
+            <button (click)="search()" placeholder="Topic" class="btn btn-primary mb-2">Search</button>
+        </span>
+    </div>
+
+
+
+  <div style="text-align: center">
+    <p>{{ticker}}</p>
+  </div>
+  <div style="background: lightgrey;">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="chartOptions.xaxis"
+      [yaxis]="chartOptions.yaxis"
+      [title]="chartOptions.title"
+    ></apx-chart>
+  </div>
+  <div style="margin-top:50px;font-size:40px;font-weight:bold;text-align:center;">
+    <p>{{companyName}}</p>
+  </div>
+  <div class="row d-flex justify-content-around">
+    <div class="col-md-4 " >
+        <p class="bg-success pill" >Exchange: {{companyExchange}}</p>
+    </div>
+    <div class="col-md-4">
+        <p class="bg-warning pill" >Currency: {{companyCurrency}}</p>
+    </div>
+    <div class="col-md-4">
+        <p class="bg-info pill" >Sector: {{companySector}}</p>
+    </div>
+  </div>
+  <div style="margin-top:30px;font-size:15px;font-weight:500;">
+    <p>{{companyDescription}}</p>
+  </div>
+  <div style="margin-top:100px">
+    <apx-chart
+      [series]="earningsOptions.series"
+      [chart]="earningsOptions.chart"
+      [xaxis]="earningsOptions.xaxis"
+      [yaxis]="earningsOptions.yaxis"
+      [title]="earningsOptions.title"
+    ></apx-chart>
+  
+  </div>
+    
+</div>
