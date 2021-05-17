@@ -4,7 +4,7 @@
 - Market Corner also provides you with information relating to Stock Annual Budget and Stock Prices with the help of a candlestick graph.
 
 
-[Live Demo](https://arnav318.github.io/MarketCorner/home)
+[Live Demo](https://marketcorner.netlify.app)
 
 ## Tech Stack
 - Market Corner is built on Angular and Express
