@@ -1,4 +1,4 @@
 export const environment = {
-  apiUrl: 'https://marketcorner.herokuapp.com:5100/',
+  apiUrl: 'https://marketcorner-backend.herokuapp.com/',
   production: true
 };
