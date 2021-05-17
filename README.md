@@ -1,6 +1,6 @@
 # Market Corner
 
-- Market Corner is a Website that gives you the latest news at the tip of your fingers. Stok or Non-Stock, viewing news is now super easy.
+- Market Corner is a Website that gives you the latest news at the tip of your fingers. Stock or Non-Stock, viewing news is now super easy.
 - Market Corner also provides you with information relating to Stock Annual Budget and Stock Prices with the help of a candlestick graph.
 
 

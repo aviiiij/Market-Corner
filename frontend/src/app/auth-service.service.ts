@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './register-page/register-page.component';
 import { creds, loggedInUser } from './login-page/login-page.component';
 import { Router } from '@angular/router';
+import { environment } from '../environments/environment'
+//import { environment } from '../environments/environment.prod'
 
 
 
@@ -17,11 +19,11 @@ export class AuthServiceService {
   constructor(private http: HttpClient, private router: Router) { }
 
   registerUser(user:User){
-    return this.http.post<any>('https://marketcorner.herokuapp.com/users/register', user);
+    return this.http.post<any>(`${environment.apiUrl}users/register`, user);
   }
 
   authenticateUser(creds: creds) {
-    return this.http.post<any>('https://marketcorner.herokuapp.com/users/authenticate', creds);
+    return this.http.post<any>(`${environment.apiUrl}users/authenticate`, creds);
   }
 
   storeUserData(token: string, user: loggedInUser) {
@@ -47,7 +49,7 @@ export class AuthServiceService {
     .set('Authorization', this.authToken)
     
     console.log(headers);
-    return this.http.post<any>('https://marketcorner.herokuapp.com/users/update', changeUser, {headers: headers});
+    return this.http.post<any>(`${environment.apiUrl}users/update`, changeUser, {headers: headers});
     
   }
 
@@ -60,7 +62,7 @@ export class AuthServiceService {
     this.loadToken();
     let headers = new HttpHeaders()
     .set('Authorization', this.authToken)
-    return this.http.post('https://marketcorner.herokuapp.com/users/deleteye', {"id":id}, {headers: headers});
+    return this.http.post(`${environment.apiUrl}users/deleteye`, {"id":id}, {headers: headers});
 
   }
 }

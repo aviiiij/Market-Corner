@@ -22,16 +22,27 @@ const data_apis = require("./routes/data_api");
 
 
 // Connect To Database (OLD CODE)
-mongoose.connect(config.database, { useNewUrlParser: true });
-// On Connection
-mongoose.connection.on('connected', () => {
-    console.log('Connected to Database ' + config.database);
-});
-// On Error
-mongoose.connection.on('error', (err) => {
-    console.log('Database error ' + err);
-});
-
+// mongoose.connect(config.database, { useNewUrlParser: true , useCreateIndex: true , useUnifiedTopology: true});
+// // On Connection
+// mongoose.connection.on('connected', () => {
+//     console.log('Connected to Database ' + config.database);
+// });
+// // On Error
+// mongoose.connection.on('error', (err) => {
+//     console.log('Database error ' + err);
+// });
+const connectionParams={
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true 
+}
+mongoose.connect(config.database,connectionParams)
+    .then( () => {
+        console.log('Connected to database ')
+    })
+    .catch( (err) => {
+        console.error(`Error connecting to the database. \n${err}`);
+    })
 const app = express();
 
 const users = require('./routes/users');
