@@ -3,7 +3,7 @@ const router = express.Router();
 const NewsAPI = require('newsapi');
 const axios = require('axios');
 
-const dotenv = require('dotenv');
+const dotenv = require('dotenv'); // load env file
 dotenv.config();
 
 const alpha1 = process.env.alpha1;

@@ -1,5 +1,5 @@
 module.exports = {
-    // configure the code below with your username, password and mlab database information
-    database: `${process.env.mongourl}`, //dev
+    // load atlas url and jwt secret key
+    database: `${process.env.mongourl}`, 
     secret: `${process.env.secret}`
 }

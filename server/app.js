@@ -9,28 +9,6 @@ const config = require('./config/database');
 const NewsAPI = require('newsapi');
 const data_apis = require("./routes/data_api");
 
-// Connect To Database (NEW) But not working!!!!!!!!!! (because of secret in db.js!!!!!)
-//const db = require('./config/database');
-// Map global promise - get rid of warning
-//mongoose.Promise = global.Promise;
-// Connect to mongoose
-//mongoose.connect(db.mongoURI, {
-//useMongoClient: true
-//})
-//.then(() => console.log('MongoDB Connected...'))
-//.catch(err => console.log(err));
-
-
-// Connect To Database (OLD CODE)
-// mongoose.connect(config.database, { useNewUrlParser: true , useCreateIndex: true , useUnifiedTopology: true});
-// // On Connection
-// mongoose.connection.on('connected', () => {
-//     console.log('Connected to Database ' + config.database);
-// });
-// // On Error
-// mongoose.connection.on('error', (err) => {
-//     console.log('Database error ' + err);
-// });
 const connectionParams={
     useNewUrlParser: true,
     useCreateIndex: true,
